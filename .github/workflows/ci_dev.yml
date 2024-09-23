@@ -21,7 +21,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Compilar por MAVEN
-        run: mvn -B package -DskipTests --file doa-api-project/pom.xml
+        run: mvn -B package -DskipTests --file ./pom.xml
       - name: Publicar no RENDER
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
