@@ -16,7 +16,7 @@ public class InformacoesAdicionaisMoradia {
     @Schema(description = "Representa o id automático gerado pelo Mongo", example = "f51bb4362e")
     private String id;
 
-    @Schema(description = "id da moradia que possui as informações adicionais", example = "1")
+    @Schema(description = "id da moradia que possui as informações adicionais", example = "123e4567-e89b-12d3-a456-426614174000")
     @NotNull(message = "O id da moradia deve ser preenchido")
     @Field("id_moradia")
     private UUID idMoradia;

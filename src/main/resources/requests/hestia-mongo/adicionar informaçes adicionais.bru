@@ -1,0 +1,18 @@
+meta {
+  name: adicionar informaçes adicionais
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/infosMoradias/addInfosMoradias
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "idMoradia": "123e4567-e89b-12d3-a456-426614174000",
+    "topicos": ["3 banheiros", "2 quartos"]
+  }
+}

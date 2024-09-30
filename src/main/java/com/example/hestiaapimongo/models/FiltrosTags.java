@@ -16,7 +16,7 @@ public class FiltrosTags {
     @Id
     @Schema(description = "Representa o id automático gerado pelo Mongo", example = "f51bb4362e")
     private String id;
-    @Schema(description = "Representa o id do usuário")
+    @Schema(description = "Representa o id do usuário", example = "123e4567-e89b-12d3-a456-426614174000")
     @NotNull(message = "O id do usuário/moradia deve ser preenchido")
     @Field("idUsuarioMoradia")
     private UUID idUsuarioMoradia;
