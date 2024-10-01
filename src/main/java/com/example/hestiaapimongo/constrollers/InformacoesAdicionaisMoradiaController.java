@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @ControllerAdvice
@@ -46,5 +47,10 @@ public class InformacoesAdicionaisMoradiaController {
     })
     public InformacoesAdicionaisMoradia addInfosMoradias (@Parameter(name = "InformacaoAdicionalMoradia", description = "É necessário um objeto de InformacoesAdicionaisMoradia") @RequestBody InformacoesAdicionaisMoradia infoMoradias) {
         return informacoesAdicionaisMoradiaService.addInformacoesAdicionaisMoradia(infoMoradias);
+    }
+
+    @GetMapping("/getAll")
+    public List<InformacoesAdicionaisMoradia> getAll() {
+        return informacoesAdicionaisMoradiaService.getAll();
     }
 }

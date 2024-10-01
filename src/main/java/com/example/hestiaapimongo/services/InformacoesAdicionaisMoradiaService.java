@@ -25,6 +25,11 @@ public class InformacoesAdicionaisMoradiaService {
         }
     }
 
+    // pegar tudo
+    public List<InformacoesAdicionaisMoradia> getAll() {
+        return repository.findAll();
+    }
+
     // salvar
     @Transactional
     public InformacoesAdicionaisMoradia addInformacoesAdicionaisMoradia(InformacoesAdicionaisMoradia info) {

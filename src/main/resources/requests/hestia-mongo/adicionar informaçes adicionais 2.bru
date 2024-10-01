@@ -1,0 +1,18 @@
+meta {
+  name: adicionar informaçes adicionais 2
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://hestia-api-mongo-dev-b1mz.onrender.com/infosMoradias/addInfosMoradias
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "idMoradia": "123e4567-e89b-12d3-a456-426614174000",
+    "topicos": ["3 banheiros", "2 quartos"]
+  }
+}
