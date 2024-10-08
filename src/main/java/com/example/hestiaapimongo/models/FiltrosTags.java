@@ -28,8 +28,7 @@ public class FiltrosTags {
     @Schema(description = "Representa o gênero que o usuário se sente mais confortável em morar junto", example = "['masculino', 'feminino']")
     private List<String> preferencia_genero;
     @Schema(description = "Representa o número máximo de pessoas que podem morar no local", example = "1")
-    @Min(value = 0, message = "O número máximo de pessoas deve ser maior ou igual a 1")
-    private int numero_maximo_pessoas;
+    private String numero_maximo_pessoas;
     @Schema(description = "Representa a frequência de fumo aceita pelo usuário", example = "'Não fumo'")
     private String frequencia_fumo;
     @Schema(description = "Representa a frequência de consumo de bebida aceita pelo usuário", example = "'Bebo frequentemente'")
@@ -39,7 +38,7 @@ public class FiltrosTags {
 
     // construtores
     public FiltrosTags(){}
-    public FiltrosTags(String id, UUID idUsuarioMoradia, String tipo, List<String> animais_estimacao, List<String> preferencia_genero, int numero_maximo_pessoas, String frequencia_fumo, String frequencia_bebida, List<String> preferencias_moveis_outro) {
+    public FiltrosTags(String id, UUID idUsuarioMoradia, String tipo, List<String> animais_estimacao, List<String> preferencia_genero, String numero_maximo_pessoas, String frequencia_fumo, String frequencia_bebida, List<String> preferencias_moveis_outro) {
         this.id = id;
         this.idUsuarioMoradia = idUsuarioMoradia;
         this.tipo = tipo;
@@ -93,11 +92,11 @@ public class FiltrosTags {
         this.preferencia_genero = preferencia_genero;
     }
 
-    public int getNumero_maximo_pessoas() {
+    public String getNumero_maximo_pessoas() {
         return numero_maximo_pessoas;
     }
 
-    public void setNumero_maximo_pessoas(int numero_maximo_pessoas) {
+    public void setNumero_maximo_pessoas(String numero_maximo_pessoas) {
         this.numero_maximo_pessoas = numero_maximo_pessoas;
     }
 
