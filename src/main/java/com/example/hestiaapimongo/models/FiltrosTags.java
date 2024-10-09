@@ -26,7 +26,7 @@ public class FiltrosTags {
     @Schema(description = "Representa os animais de estimação que os usuários podem aceitar ou não", example = "['cachorro', 'gato']")
     private List<String> animais_estimacao;
     @Schema(description = "Representa o gênero que o usuário se sente mais confortável em morar junto", example = "['masculino', 'feminino']")
-    private List<String> preferencia_genero;
+    private String preferencia_genero;
     @Schema(description = "Representa o número máximo de pessoas que podem morar no local", example = "1")
     private String numero_maximo_pessoas;
     @Schema(description = "Representa a frequência de fumo aceita pelo usuário", example = "'Não fumo'")
@@ -38,7 +38,7 @@ public class FiltrosTags {
 
     // construtores
     public FiltrosTags(){}
-    public FiltrosTags(String id, UUID idUsuarioMoradia, String tipo, List<String> animais_estimacao, List<String> preferencia_genero, String numero_maximo_pessoas, String frequencia_fumo, String frequencia_bebida, List<String> preferencias_moveis_outro) {
+    public FiltrosTags(String id, UUID idUsuarioMoradia, String tipo, List<String> animais_estimacao, String preferencia_genero, String numero_maximo_pessoas, String frequencia_fumo, String frequencia_bebida, List<String> preferencias_moveis_outro) {
         this.id = id;
         this.idUsuarioMoradia = idUsuarioMoradia;
         this.tipo = tipo;
@@ -84,11 +84,11 @@ public class FiltrosTags {
         this.animais_estimacao = animais_estimacao;
     }
 
-    public List<String> getPreferencia_genero() {
+    public String getPreferencia_genero() {
         return preferencia_genero;
     }
 
-    public void setPreferencia_genero(List<String> preferencia_genero) {
+    public void setPreferencia_genero(String preferencia_genero) {
         this.preferencia_genero = preferencia_genero;
     }
 
