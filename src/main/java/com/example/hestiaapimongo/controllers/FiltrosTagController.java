@@ -1,4 +1,4 @@
-package com.example.hestiaapimongo.constrollers;
+package com.example.hestiaapimongo.controllers;
 
 import com.example.hestiaapimongo.models.FiltrosTags;
 import com.example.hestiaapimongo.services.FiltrosTagService;
@@ -10,8 +10,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 @ControllerAdvice
@@ -47,22 +45,5 @@ public class FiltrosTagController {
     })
     public FiltrosTags addFiltrosTags(@Parameter(name = "FiltrosTags", description = "É necessário um objeto de FiltrosTags") @RequestBody FiltrosTags filtrosTags) {
         return filtrosTagService.addFiltrosTag(filtrosTags);
-    }
-    @GetMapping("/status")
-    @Operation(summary = "Verifica o status da API",
-            description = "Retorna um map contendo o status da API")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Status retornado com sucesso!",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = FiltrosTags.class))),
-            @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
-                    content = @Content())
-    })
-    public Map<String, String> getStatus() {
-        // Cria um mapa com informações de status
-        Map<String, String> status = new HashMap<>();
-        status.put("status", "API is running");
-
-        // Retorna o mapa como JSON
-        return status;
     }
 }

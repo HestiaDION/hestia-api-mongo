@@ -1,4 +1,4 @@
-package com.example.hestiaapimongo.constrollers;
+package com.example.hestiaapimongo.controllers;
 
 import com.example.hestiaapimongo.models.FiltrosTags;
 import com.example.hestiaapimongo.models.MoradiasFavoritas;
