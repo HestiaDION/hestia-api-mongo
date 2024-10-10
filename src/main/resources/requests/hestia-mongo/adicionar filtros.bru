@@ -6,6 +6,18 @@ meta {
 
 post {
   url: https://hestia-api-mongo-dev-b1mz.onrender.com/filtros_tag/addFiltrosTag
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "idUsuarioMoradia": "f15d1343-e7b2-4a45-a794-ae59cc092164",
+    "tipo": "universitario",
+    "animais_estimacao": ["cachorro", "gato"],
+    "preferencia_genero": "mulheres",
+    "numero_maximo_pessoas": "2",
+    "frequencia_fumo": "Não fumo",
+    "frequencia_bebida": "Não bebo"
+  }
 }
