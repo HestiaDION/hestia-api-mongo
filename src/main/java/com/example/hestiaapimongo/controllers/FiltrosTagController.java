@@ -46,4 +46,16 @@ public class FiltrosTagController {
     public FiltrosTags addFiltrosTags(@Parameter(name = "FiltrosTags", description = "É necessário um objeto de FiltrosTags") @RequestBody FiltrosTags filtrosTags) {
         return filtrosTagService.addFiltrosTag(filtrosTags);
     }
+    @PutMapping("/updateFiltrosTag")
+    @Operation(summary = "Atualiza os filtros/tags somente no Redis",
+            description = "Retorna o filtro/tag atualizado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Filtro/tag atualizados com sucesso!",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = FiltrosTags.class))),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
+                    content = @Content())
+    })
+    public FiltrosTags updateFiltrosTagInRedis(@Parameter(name = "FiltrosTags", description = "É necessário um objeto de FiltrosTags") @RequestBody FiltrosTags filtrosTags) {
+        return filtrosTagService.updateFiltrosTagInRedis(filtrosTags);
+    }
 }
