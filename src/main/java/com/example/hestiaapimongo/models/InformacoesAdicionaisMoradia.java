@@ -6,12 +6,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
 @Document("informacoes_adicionais_moradia")
 @Schema(description = "Informações adicionais da moradia")
-public class InformacoesAdicionaisMoradia {
+public class InformacoesAdicionaisMoradia implements Serializable {
     @Id
     @Schema(description = "Representa o id automático gerado pelo Mongo", example = "f51bb4362e")
     private String id;
