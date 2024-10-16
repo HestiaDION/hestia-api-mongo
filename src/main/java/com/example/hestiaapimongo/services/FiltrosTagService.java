@@ -42,4 +42,8 @@ public class FiltrosTagService {
     public FiltrosTags addFiltrosTag(FiltrosTags filtrosTags) {
         return filtrosTagRepository.save(filtrosTags);
     }
+
+    public List<FiltrosTags> getAll() {
+        return filtrosTagRepository.findAll();
+    }
 }

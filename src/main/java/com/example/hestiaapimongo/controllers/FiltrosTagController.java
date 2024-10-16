@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @ControllerAdvice
@@ -21,7 +22,7 @@ public class FiltrosTagController {
         this.filtrosTagService = filtrosTagService;
     }
 
-    @GetMapping("/getFiltrosTag/{id_usuario_moradia}")
+    @GetMapping("/getFiltrosTag/{idUsuarioMoradia}")
     @Operation(summary = "Lista todos os filtros/tags de um usuário/moradia",
             description = "Retorna os filtros/tags de um usuário/moradia")
     @ApiResponses(value = {
@@ -30,8 +31,8 @@ public class FiltrosTagController {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
                     content = @Content())
     })
-    public FiltrosTags getFiltrosTag(@Parameter(name = "id_usuario_moradia", description = "É necessário o id do usuário/moradia", required = true) @PathVariable UUID id_usuario_moradia) {
-        return filtrosTagService.getFiltrosTagsByIdUsuarioMoradia(id_usuario_moradia);
+    public FiltrosTags getFiltrosTag(@Parameter(name = "idUsuarioMoradia", description = "É necessário o id do usuário/moradia", required = true) @PathVariable UUID idUsuarioMoradia) {
+        return filtrosTagService.getFiltrosTagsByIdUsuarioMoradia(idUsuarioMoradia);
     }
 
     @PostMapping("/addFiltrosTag")
@@ -57,5 +58,18 @@ public class FiltrosTagController {
     })
     public FiltrosTags updateFiltrosTagInRedis(@Parameter(name = "FiltrosTags", description = "É necessário um objeto de FiltrosTags") @RequestBody FiltrosTags filtrosTags) {
         return filtrosTagService.updateFiltrosTagInRedis(filtrosTags);
+    }
+
+    @GetMapping("/getFiltrosTag")
+    @Operation(summary = "Lista todos os filtros/tags",
+            description = "Retorna os filtros/tags cadastrados")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Filtros/tags retornados com sucesso!",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = FiltrosTags.class))),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
+                    content = @Content())
+    })
+    public List<FiltrosTags> getAll() {
+        return filtrosTagService.getAll();
     }
 }
