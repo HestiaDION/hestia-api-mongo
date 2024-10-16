@@ -31,14 +31,14 @@ public class FiltrosTagService {
 
     // Método para atualizar apenas no Redis
     @Transactional
-    @CachePut(value = "filtrosTags", key = "#filtrosTags.id_usuario_moradia")
+    @CachePut(value = "filtrosTags", key = "#filtrosTags.idUsuarioMoradia")
     public FiltrosTags updateFiltrosTagInRedis(FiltrosTags filtrosTags) {
         return filtrosTags;
     }
 
     // salvar
     @Transactional
-    @CachePut(value = "filtrosTags", key = "#filtrosTags.id_usuario_moradia")
+    @CachePut(value = "filtrosTags", key = "#filtrosTags.idUsuarioMoradia")
     public FiltrosTags addFiltrosTag(FiltrosTags filtrosTags) {
         return filtrosTagRepository.save(filtrosTags);
     }

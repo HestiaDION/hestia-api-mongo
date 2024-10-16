@@ -61,14 +61,6 @@ public class FiltrosTags implements Serializable {
         this.id = id;
     }
 
-    public UUID getIdUsuarioMoradia() {
-        return idUsuarioMoradia;
-    }
-
-    public void setIdUsuarioMoradia(UUID idUsuarioMoradia) {
-        this.idUsuarioMoradia = idUsuarioMoradia;
-    }
-
     public String getTipo() {
         return this.tipo;
     }
@@ -140,4 +132,11 @@ public class FiltrosTags implements Serializable {
                 '}';
     }
 
+    public UUID getIdUsuarioMoradia() {
+        return idUsuarioMoradia;
+    }
+
+    public void setIdUsuarioMoradia(UUID idUsuarioMoradia) {
+        this.idUsuarioMoradia = idUsuarioMoradia;
+    }
 }
