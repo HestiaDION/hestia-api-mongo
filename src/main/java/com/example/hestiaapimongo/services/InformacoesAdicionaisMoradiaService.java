@@ -2,6 +2,9 @@ package com.example.hestiaapimongo.services;
 
 import com.example.hestiaapimongo.models.InformacoesAdicionaisMoradia;
 import com.example.hestiaapimongo.repository.InformacoesAdicionaisMoradiaRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +19,8 @@ public class InformacoesAdicionaisMoradiaService {
     }
 
     // pegar todos as informações de uma moradia
+    @Cacheable(value = "infosAdicionais", key = "#id")
+    @CacheEvict(value = "infosAdicionais", key = "#id")
     public InformacoesAdicionaisMoradia getInformacoesAdicionaisMoradiaByIdMoradia(UUID id) throws RuntimeException {
         InformacoesAdicionaisMoradia infomacoesAdicionais = repository.findInformacoesAdicionaisMoradiaByIdMoradia(id);
         if (infomacoesAdicionais != null) {
@@ -32,6 +37,8 @@ public class InformacoesAdicionaisMoradiaService {
 
     // salvar
     @Transactional
+    @CachePut(value = "infosAdicionais", key = "#info.idMoradia")
+    @CacheEvict(value = "infosAdicionais", key = "#info.idMoradia")
     public InformacoesAdicionaisMoradia addInformacoesAdicionaisMoradia(InformacoesAdicionaisMoradia info) {
         return repository.save(info);
     }

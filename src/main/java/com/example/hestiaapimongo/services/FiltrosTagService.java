@@ -2,6 +2,7 @@ package com.example.hestiaapimongo.services;
 
 import com.example.hestiaapimongo.models.FiltrosTags;
 import com.example.hestiaapimongo.repository.FiltrosTagRepository;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class FiltrosTagService {
 
     // buscar todos os filtros/tags de um usuário/moradia
     @Cacheable(value = "filtrosTags", key = "#id")
+    @CacheEvict(value = "filtrosTags", key = "#id")
     public FiltrosTags getFiltrosTagsByIdUsuarioMoradia (UUID id) throws RuntimeException{
         FiltrosTags filtrosTags = filtrosTagRepository.getFiltrosTagsByIdUsuarioMoradia(id);
         if (filtrosTags != null) {
@@ -32,6 +34,7 @@ public class FiltrosTagService {
     // Método para atualizar apenas no Redis
     @Transactional
     @CachePut(value = "filtrosTags", key = "#filtrosTags.idUsuarioMoradia")
+    @CacheEvict(value = "filtrosTags", key = "#filtrosTags.idUsuarioMoradia")
     public FiltrosTags updateFiltrosTagInRedis(FiltrosTags filtrosTags) {
         return filtrosTags;
     }
@@ -39,6 +42,7 @@ public class FiltrosTagService {
     // salvar
     @Transactional
     @CachePut(value = "filtrosTags", key = "#filtrosTags.idUsuarioMoradia")
+    @CacheEvict(value = "filtrosTags", key = "#filtrosTags.idUsuarioMoradia")
     public FiltrosTags addFiltrosTag(FiltrosTags filtrosTags) {
         return filtrosTagRepository.save(filtrosTags);
     }

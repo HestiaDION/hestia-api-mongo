@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,8 +33,14 @@ public class FiltrosTagController {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
                     content = @Content())
     })
-    public FiltrosTags getFiltrosTag(@Parameter(name = "idUsuarioMoradia", description = "É necessário o id do usuário/moradia", required = true) @PathVariable UUID idUsuarioMoradia) {
-        return filtrosTagService.getFiltrosTagsByIdUsuarioMoradia(idUsuarioMoradia);
+    public ResponseEntity<?> getFiltrosTag(@Parameter(name = "idUsuarioMoradia", description = "É necessário o id do usuário/moradia", required = true) @PathVariable UUID idUsuarioMoradia) {
+        FiltrosTags filtrosTags;
+        try {
+            filtrosTags = filtrosTagService.getFiltrosTagsByIdUsuarioMoradia(idUsuarioMoradia);
+        } catch (RuntimeException r) {
+            return new ResponseEntity<>(r.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(filtrosTags, HttpStatus.OK);
     }
 
     @PostMapping("/addFiltrosTag")
@@ -44,8 +52,8 @@ public class FiltrosTagController {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
                     content = @Content())
     })
-    public FiltrosTags addFiltrosTags(@Parameter(name = "FiltrosTags", description = "É necessário um objeto de FiltrosTags") @RequestBody FiltrosTags filtrosTags) {
-        return filtrosTagService.addFiltrosTag(filtrosTags);
+    public ResponseEntity<?> addFiltrosTags(@Parameter(name = "FiltrosTags", description = "É necessário um objeto de FiltrosTags") @RequestBody FiltrosTags filtrosTags) {
+        return new ResponseEntity<>(filtrosTagService.addFiltrosTag(filtrosTags), HttpStatus.CREATED);
     }
     @PutMapping("/updateFiltrosTag")
     @Operation(summary = "Atualiza os filtros/tags somente no Redis",

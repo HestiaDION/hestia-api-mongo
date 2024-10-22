@@ -9,6 +9,9 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,8 +35,14 @@ public class InformacoesAdicionaisMoradiaController {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
                     content = @Content())
     })
-    public InformacoesAdicionaisMoradia getInfosMoradias(@Parameter(name = "id_moradia", description = "É necessário o id da moradia", required = true) @PathVariable UUID id_moradia) {
-        return informacoesAdicionaisMoradiaService.getInformacoesAdicionaisMoradiaByIdMoradia(id_moradia);
+    public ResponseEntity<?> getInfosMoradias(@Parameter(name = "id_moradia", description = "É necessário o id da moradia", required = true) @PathVariable UUID id_moradia) {
+        InformacoesAdicionaisMoradia informacoesAdicionaisMoradia;
+        try {
+            informacoesAdicionaisMoradia = informacoesAdicionaisMoradiaService.getInformacoesAdicionaisMoradiaByIdMoradia(id_moradia);
+        } catch (RuntimeException r) {
+            return new ResponseEntity<>(r.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(informacoesAdicionaisMoradia, HttpStatus.OK);
     }
 
     @PostMapping("/addInfosMoradias")
@@ -45,8 +54,8 @@ public class InformacoesAdicionaisMoradiaController {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
                     content = @Content())
     })
-    public InformacoesAdicionaisMoradia addInfosMoradias (@Parameter(name = "InformacaoAdicionalMoradia", description = "É necessário um objeto de InformacoesAdicionaisMoradia") @RequestBody InformacoesAdicionaisMoradia infoMoradias) {
-        return informacoesAdicionaisMoradiaService.addInformacoesAdicionaisMoradia(infoMoradias);
+    public ResponseEntity<?> addInfosMoradias (@Parameter(name = "InformacaoAdicionalMoradia", description = "É necessário um objeto de InformacoesAdicionaisMoradia") @RequestBody InformacoesAdicionaisMoradia infoMoradias) {
+        return new ResponseEntity<>(informacoesAdicionaisMoradiaService.addInformacoesAdicionaisMoradia(infoMoradias), HttpStatus.CREATED);
     }
 
     @GetMapping("/getAll")

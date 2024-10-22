@@ -9,6 +9,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -44,8 +46,8 @@ public class MoradiasFavoritasController {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
                     content = @Content())
     })
-    public MoradiasFavoritas addMoradiasFavoritas (@Parameter(name = "MoradiasFavoritas", description = "É necessário um objeto de MoradiasFavoritas") @RequestBody MoradiasFavoritas moradiasFavoritas) {
-        return moradiasFavoritasService.addMoradiasFavoritas(moradiasFavoritas);
+    public ResponseEntity<?> addMoradiasFavoritas (@Parameter(name = "MoradiasFavoritas", description = "É necessário um objeto de MoradiasFavoritas") @RequestBody MoradiasFavoritas moradiasFavoritas) {
+        return new ResponseEntity<>(moradiasFavoritasService.addMoradiasFavoritas(moradiasFavoritas), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/deleteMoradiasFavoritas/{id_usuario}/{id_moradia}")
@@ -57,7 +59,13 @@ public class MoradiasFavoritasController {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
                     content = @Content())
     })
-    public UUID deleteMoradiasFavoritas (@Parameter(name = "id_usuario", description = "É necessário o id do usuário") @PathVariable UUID id_usuario, @Parameter(name = "id_moradia", description = "É necessário o id da moradia a ser deletada") @PathVariable UUID id_moradia) {
-        return moradiasFavoritasService.deleteMoradiasFavoritas(id_usuario, id_moradia);
+    public ResponseEntity<?> deleteMoradiasFavoritas (@Parameter(name = "id_usuario", description = "É necessário o id do usuário") @PathVariable UUID id_usuario, @Parameter(name = "id_moradia", description = "É necessário o id da moradia a ser deletada") @PathVariable UUID id_moradia) {
+        UUID uuid;
+        try {
+            uuid = moradiasFavoritasService.deleteMoradiasFavoritas(id_usuario, id_moradia);
+        } catch (RuntimeException r) {
+            return new ResponseEntity<>(r.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(uuid, HttpStatus.OK);
     }
 }
