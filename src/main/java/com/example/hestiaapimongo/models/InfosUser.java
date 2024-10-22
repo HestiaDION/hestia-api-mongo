@@ -6,9 +6,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.io.Serializable;
+
 @Document("info_user")
 @Schema(description = "Informações do usuário para preencher banco do primeiro")
-public class InfosUser {
+public class InfosUser implements Serializable {
     @Id
     @Schema(description = "Representa o id automático gerado pelo Mongo", example = "f51bb4362e")
     private String id;
