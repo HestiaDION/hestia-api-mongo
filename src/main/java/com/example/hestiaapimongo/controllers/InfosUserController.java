@@ -37,7 +37,7 @@ public class InfosUserController {
         return infosUserService.addInfosUser(infosUser);
     }
 
-    @PatchMapping("/updateInfosUser")
+    @PatchMapping("/updateInfosUser/{email}/{fotoUrl}")
     @Operation(summary = "Altera foto do universitário",
             description = "Altera foto do universitário para preenchimento do banco do primeiro")
     @ApiResponses(value = {
