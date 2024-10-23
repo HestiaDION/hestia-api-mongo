@@ -37,7 +37,7 @@ public class InfosUserController {
         return infosUserService.addInfosUser(infosUser);
     }
 
-    @PatchMapping("/updateInfosUser/{email}/{fotoUrl}")
+    @PatchMapping("/updateInfosUser/{email}")
     @Operation(summary = "Altera foto do universitário",
             description = "Altera foto do universitário para preenchimento do banco do primeiro")
     @ApiResponses(value = {
@@ -46,13 +46,13 @@ public class InfosUserController {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
                     content = @Content())
     })
-    public ResponseEntity<?> updateInfosUser(@Parameter(name = "E-mail do universitário", description = "É necessário o e-mail do universitário") @PathVariable String email, @Parameter(name = "Foto do universitário", description = "É necessária a nova url da foto do universitário") @PathVariable String fotoUrl) {
-        InfosUser infosUser;
+    public ResponseEntity<?> updateInfosUser(@Parameter(name = "E-mail do universitário", description = "É necessário o e-mail do universitário") @PathVariable String email, @Parameter(name = "Foto do universitário", description = "É necessária a nova url da foto do universitário") @RequestBody InfosUser infosUser) {
+        InfosUser infos;
         try {
-            infosUser = infosUserService.updateInfosUser(email, fotoUrl);
+            infos = infosUserService.updateInfosUser(email, infosUser.getUrlFoto());
         } catch (RuntimeException r) {
             return new ResponseEntity<>(r.getMessage(), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(infosUser, HttpStatus.OK);
+        return new ResponseEntity<>(infos, HttpStatus.OK);
     }
 }
