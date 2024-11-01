@@ -18,8 +18,6 @@ public class ImagensMoradiaService {
 
     // cadastrar
     @Transactional
-    @CachePut(value = "imagensMoradia", key = "#imagensMoradia.idMoradia")
-    @CacheEvict(value = "imagensMoradia", key = "#imagensMoradia.idMoradia")
     public ImagensMoradia addImagensMoradia(ImagensMoradia imagensMoradia) {
         return imagensMoradiaRepository.save(imagensMoradia);
     }

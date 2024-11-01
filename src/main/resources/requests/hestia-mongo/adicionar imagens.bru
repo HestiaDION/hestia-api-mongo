@@ -1,0 +1,18 @@
+meta {
+  name: adicionar imagens
+  type: http
+  seq: 8
+}
+
+post {
+  url: https://hestia-api-mongo-dev-b1mz.onrender.com/imagens_moradia/addImagensMoradia
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "idMoradia": "eb62cc57-71e1-46ec-a108-84eb08c6fcc0",
+    "imagens": ["content://media/external/images/media/1000075904","content://media/external/images/media/1000075903","content://media/external/images/media/1000075902","content://media/external/images/media/1000075901"]
+  }
+}
