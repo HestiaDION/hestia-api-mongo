@@ -37,8 +37,6 @@ public class InformacoesAdicionaisMoradiaService {
 
     // salvar
     @Transactional
-    @CachePut(value = "infosAdicionais", key = "#info.idMoradia")
-    @CacheEvict(value = "infosAdicionais", key = "#info.idMoradia")
     public InformacoesAdicionaisMoradia addInformacoesAdicionaisMoradia(InformacoesAdicionaisMoradia info) {
         return repository.save(info);
     }
