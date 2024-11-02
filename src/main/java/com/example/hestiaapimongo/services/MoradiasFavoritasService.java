@@ -33,8 +33,6 @@ public class MoradiasFavoritasService {
 
     // Salvar nova moradia favorita e atualizar o cache
     @Transactional
-    @CachePut(value = "moradiasFav", key = "#moradiasFavoritas.idUsuario")
-    @CacheEvict(value = "moradiasFav", key = "#moradiasFavoritas.idUsuario")
     public MoradiasFavoritas addMoradiasFavoritas(MoradiasFavoritas moradiasFavoritas) {
         return moradiasFavoritasRepository.save(moradiasFavoritas);
     }

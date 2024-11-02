@@ -41,8 +41,6 @@ public class FiltrosTagService {
 
     // salvar
     @Transactional
-    @CachePut(value = "filtrosTags", key = "#filtrosTags.idUsuarioMoradia")
-    @CacheEvict(value = "filtrosTags", key = "#filtrosTags.idUsuarioMoradia")
     public FiltrosTags addFiltrosTag(FiltrosTags filtrosTags) {
         return filtrosTagRepository.save(filtrosTags);
     }
