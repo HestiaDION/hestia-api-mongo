@@ -60,12 +60,12 @@ public class MoradiasFavoritasController {
                     content = @Content())
     })
     public ResponseEntity<?> deleteMoradiasFavoritas (@Parameter(name = "id_usuario", description = "É necessário o id do usuário") @PathVariable UUID id_usuario, @Parameter(name = "id_moradia", description = "É necessário o id da moradia a ser deletada") @PathVariable UUID id_moradia) {
-        UUID uuid;
+        MoradiasFavoritas moradiasFavoritas;
         try {
-            uuid = moradiasFavoritasService.deleteMoradiasFavoritas(id_usuario, id_moradia);
+            moradiasFavoritas = moradiasFavoritasService.deleteMoradiasFavoritas(id_usuario, id_moradia);
         } catch (RuntimeException r) {
             return new ResponseEntity<>(r.getMessage(), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(uuid, HttpStatus.OK);
+        return new ResponseEntity<>(moradiasFavoritas, HttpStatus.OK);
     }
 }
