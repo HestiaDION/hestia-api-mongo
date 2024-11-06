@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -34,7 +35,19 @@ public class MoradiasFavoritasService {
     // Salvar nova moradia favorita e atualizar o cache
     @Transactional
     public MoradiasFavoritas addMoradiasFavoritas(MoradiasFavoritas moradiasFavoritas) {
-        return moradiasFavoritasRepository.save(moradiasFavoritas);
+        // Busca o documento de favoritos pelo id do usuário
+        MoradiasFavoritas favoritoExistente = moradiasFavoritasRepository.findMoradiasFavoritasByIdUsuario(moradiasFavoritas.getIdUsuario());
+
+        if (favoritoExistente != null) {
+            favoritoExistente.setMoradias_ids(moradiasFavoritas.getMoradias_ids());
+            return moradiasFavoritasRepository.save(favoritoExistente);
+        } else {
+            // Caso o documento não exista, cria um novo
+            MoradiasFavoritas novoFavorito = new MoradiasFavoritas();
+            novoFavorito.setIdUsuario(moradiasFavoritas.getIdUsuario());
+            novoFavorito.setMoradias_ids(moradiasFavoritas.getMoradias_ids());
+            return moradiasFavoritasRepository.save(novoFavorito);
+        }
     }
 
     // Remover moradia favorita do banco e do cache
