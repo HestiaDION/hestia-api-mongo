@@ -53,7 +53,7 @@ public class MoradiasFavoritasService {
     // Remover moradia favorita do banco e do cache
     @Transactional
     @CacheEvict(value = "moradiasFav", key = "#id_usuario")
-    public UUID deleteMoradiasFavoritas(UUID id_usuario, UUID id_moradia) throws RuntimeException {
+    public MoradiasFavoritas deleteMoradiasFavoritas(UUID id_usuario, UUID id_moradia) throws RuntimeException {
         MoradiasFavoritas moradiasFavoritas;
         try {
             moradiasFavoritas = getMoradiasFavoritasByIdUsuario(id_usuario);
@@ -66,7 +66,7 @@ public class MoradiasFavoritasService {
         if (moradias_ids.remove(id_moradia)) {
             moradiasFavoritas.setMoradias_ids(moradias_ids);
             moradiasFavoritasRepository.save(moradiasFavoritas);
-            return id_moradia;
+            return moradiasFavoritas;
         } else {
             throw new RuntimeException("Nenhuma moradia foi encontrada para ser removida!");
         }
