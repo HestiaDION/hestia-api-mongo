@@ -1,10 +1,10 @@
-name: CI_MAIN
+name: CI_DEV
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "dev" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "dev" ]
 
   workflow_dispatch:
 
@@ -25,5 +25,5 @@ jobs:
       - name: Publicar no RENDER
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
-          service-id: ${{ secrets.service_id }}
+          service-id: ${{ secrets.service_id_dev }}
           api-key: ${{ secrets.api_key }}
